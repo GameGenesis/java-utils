@@ -45,14 +45,15 @@ public class Str {
             String match = m.group();
 
             decimal = "";
-            Matcher dm = Pattern.compile("\\:\\d[fF]").matcher(match);
+            Matcher dm = Pattern.compile("\\:[fF]\\d?").matcher(match);
             while (dm.find())
                 decimal = dm.group();
 
             percent = "";
-            Matcher pm = Pattern.compile("\\:[pP]\\d").matcher(match);
+            Matcher pm = Pattern.compile("\\:[pP]\\d?|%").matcher(match);
             while (pm.find())
                 percent = pm.group();
+            percent = percent.replace("%", ":P1");
             
             currency = Pattern.compile("\\:[cC]|\\$").matcher(match).find();
             tempC = Pattern.compile("\\:[tT][cC]").matcher(match).find();
@@ -63,13 +64,18 @@ public class Str {
             String value = args[index].toString();
 
             if (decimal != "") {
-                decimal = decimal.replace(":", ".").replace("F", "f");
-                value = String.format("%" + decimal, Float.parseFloat(value));
+                decimal = decimal.replaceAll("[^0-9]", "");
+                if (decimal == "")
+                    decimal = "1";
+                value = String.format("%." + decimal + "f", Float.parseFloat(value));
             }
 
             else if (percent != "") {
                 NumberFormat defaultFormat = NumberFormat.getPercentInstance();
-		        defaultFormat.setMinimumFractionDigits(Integer.parseInt(percent.replaceAll("[^0-9]", "")));
+                percent = percent.replaceAll("[^0-9]", "");
+                if (percent == "")
+                    percent = "1";
+		        defaultFormat.setMinimumFractionDigits(Integer.parseInt(percent));
                 value = defaultFormat.format(Float.parseFloat(value));
             }
 
