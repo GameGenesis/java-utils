@@ -5,6 +5,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Str {
+    public static String fromCharArray(char[] charArray) {
+        StringBuilder sb = new StringBuilder();
+ 
+        for (Character ch : charArray) {
+            sb.append(ch);
+        }
+
+        return sb.toString();
+    }
+
     public static String fmt(String string, Object... args) {
         String newString = string;
 
