@@ -1,12 +1,33 @@
 package String;
 
 import java.text.NumberFormat;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Str {
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static String inputf(String message, Object... args) {
+        printf(" ".toCharArray(), "".toCharArray(), message, args);
+        return input();
+    }
+
+    public static String input(String message) {
+        print(" ".toCharArray(), "".toCharArray(), message);
+        return input();
+    }
+
+    public static String input() {
+        return scanner.nextLine();
+    }
+
     public static void printf(String string, Object... args) {
         print(fmt(string, args));
+    }
+
+    public static void printf(char[] separationChars, char[] endChars, String string, Object... args) {
+        print(separationChars, endChars, fmt(string, args));
     }
 
     public static void print(String... values) {
