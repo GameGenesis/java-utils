@@ -10,6 +10,9 @@ public class StringFormat {
 
         String decimal = "";
         boolean currency = false;
+        boolean tempC = false;
+        boolean tempF = false;
+
         Matcher m = Pattern.compile("\\{(.*?)\\d(.*?)\\}").matcher(string);
         while (m.find()) {
             String match = m.group();
@@ -19,8 +22,9 @@ public class StringFormat {
             while (dm.find())
                 decimal = dm.group();
             
-            currency = Pattern.compile("\\$").matcher(match).find();
-            System.out.println(currency);
+            currency = Pattern.compile("\\:[cC]|\\$").matcher(match).find();
+            tempC = Pattern.compile("\\:[tT][cC]").matcher(match).find();
+            tempF = Pattern.compile("\\:[tT][fF]").matcher(match).find();
 
             int index = Integer.parseInt(match.replace(decimal, "").replaceAll("[^0-9]", ""));
             String value = args[index].toString();
@@ -32,6 +36,11 @@ public class StringFormat {
                 NumberFormat formatter = NumberFormat.getCurrencyInstance();
                 value = formatter.format(Float.parseFloat(value));
             }
+
+            if (tempC)
+                value += " °C";
+            if (tempF)
+                value += " °F";
 
             newString = newString.replace(match, value);
         }
