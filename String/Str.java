@@ -94,17 +94,12 @@ public class Str {
             int index = Integer.parseInt(updatedMatch.replaceAll("[^0-9]", ""));
             String value = args[index].toString();
 
-            if (alignment != "") {
-                String alignmentSign = alignment.contains("-") ? "-" : "";
-                alignment = alignment.replaceAll("[^0-9]", "");
-                value = String.format("%" + alignmentSign + alignment + "d", Integer.parseInt(value));
-            }
-
             if (decimal != "") {
                 decimal = decimal.replaceAll("[^0-9]", "");
                 if (decimal == "")
                     decimal = "1";
-                value = String.format("%." + decimal + "f", Float.parseFloat(value));
+                String newFloat = String.format("%." + decimal + "f", Float.parseFloat(value));
+                value = value.replace(value.replaceAll("\\s+",""), newFloat);
             }
 
             else if (percent != "") {
@@ -126,6 +121,12 @@ public class Str {
             else if (tempF)
                 value += " °F";
 
+            if (alignment != "") {
+                String alignmentSign = alignment.contains("-") ? "-" : "";
+                alignment = alignment.replaceAll("[^0-9]", "");
+                value = String.format("%" + alignmentSign + alignment + "s", value);
+            }
+        
             newString = newString.replace(match, value);
         }
 
