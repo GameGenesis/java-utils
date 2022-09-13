@@ -4,7 +4,7 @@ import java.text.NumberFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringFormat {
+public class Str {
     public static String fmt(String string, Object... args) {
         String newString = string;
 
@@ -18,7 +18,7 @@ public class StringFormat {
             String match = m.group();
 
             decimal = "";
-            Matcher dm = Pattern.compile(".\\df").matcher(match);
+            Matcher dm = Pattern.compile("\\:\\d[fF]").matcher(match);
             while (dm.find())
                 decimal = dm.group();
             
@@ -29,8 +29,10 @@ public class StringFormat {
             int index = Integer.parseInt(match.replace(decimal, "").replaceAll("[^0-9]", ""));
             String value = args[index].toString();
 
-            if (decimal != "")
+            if (decimal != "") {
+                decimal = decimal.replace(":", ".").replace("F", "f");
                 value = String.format("%" + decimal, Float.parseFloat(value));
+            }
 
             if (currency) {
                 NumberFormat formatter = NumberFormat.getCurrencyInstance();
