@@ -69,6 +69,11 @@ public class Str {
         while (m.find()) {
             String match = m.group();
 
+            alignment = "";
+            Matcher am = Pattern.compile("\\,\s?\\-?\\d+").matcher(match);
+            while (am.find())
+                alignment = am.group();
+
             decimal = "";
             Matcher dm = Pattern.compile("\\:\s?[fF]\\d?").matcher(match);
             while (dm.find())
@@ -84,9 +89,15 @@ public class Str {
             tempC = Pattern.compile("\\:\s?[tT][cC]").matcher(match).find();
             tempF = Pattern.compile("\\:\s?[tT][fF]").matcher(match).find();
 
-            String updatedMatch = match.replace(decimal, "").replace(percent, "");
+            String updatedMatch = match.replace(alignment, "").replace(decimal, "").replace(percent, "");
             int index = Integer.parseInt(updatedMatch.replaceAll("[^0-9]", ""));
             String value = args[index].toString();
+
+            if (alignment != "") {
+                String alignmentSign = alignment.contains("-") ? "-" : "";
+                alignment = alignment.replaceAll("[^0-9]", "");
+                value = String.format("%" + alignmentSign + alignment + "d", Integer.parseInt(value));
+            }
 
             if (decimal != "") {
                 decimal = decimal.replaceAll("[^0-9]", "");
