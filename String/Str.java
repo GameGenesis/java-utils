@@ -5,6 +5,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Str {
+    public static void print(String... values) {
+        print(" ".toCharArray(), "\n".toCharArray(), values);
+    }
+
+    public static void print(char[] separationChars, char[] endChars, String... values) {
+        String string = "";
+        for (int i = 0; i < values.length; i++) {
+            string += values[i];
+
+            if (i < values.length - 1)
+                string += fromCharArray(separationChars);
+        }
+        
+        System.out.print(string + fromCharArray(endChars));
+    }
+
     public static String fromCharArray(char[] charArray) {
         StringBuilder sb = new StringBuilder();
  
