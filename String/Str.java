@@ -35,6 +35,7 @@ public class Str {
         String newString = string;
 
         String decimal = "";
+        String percent = "";
         boolean currency = false;
         boolean tempC = false;
         boolean tempF = false;
@@ -47,12 +48,18 @@ public class Str {
             Matcher dm = Pattern.compile("\\:\\d[fF]").matcher(match);
             while (dm.find())
                 decimal = dm.group();
+
+            percent = "";
+            Matcher pm = Pattern.compile("\\:[pP]\\d").matcher(match);
+            while (pm.find())
+                percent = pm.group();
             
             currency = Pattern.compile("\\:[cC]|\\$").matcher(match).find();
             tempC = Pattern.compile("\\:[tT][cC]").matcher(match).find();
             tempF = Pattern.compile("\\:[tT][fF]").matcher(match).find();
 
-            int index = Integer.parseInt(match.replace(decimal, "").replaceAll("[^0-9]", ""));
+            String updatedMatch = match.replace(decimal, "").replace(percent, "");
+            int index = Integer.parseInt(updatedMatch.replaceAll("[^0-9]", ""));
             String value = args[index].toString();
 
             if (decimal != "") {
@@ -60,14 +67,20 @@ public class Str {
                 value = String.format("%" + decimal, Float.parseFloat(value));
             }
 
-            if (currency) {
+            else if (percent != "") {
+                NumberFormat defaultFormat = NumberFormat.getPercentInstance();
+		        defaultFormat.setMinimumFractionDigits(Integer.parseInt(percent.replaceAll("[^0-9]", "")));
+                value = defaultFormat.format(Float.parseFloat(value));
+            }
+
+            else if (currency) {
                 NumberFormat formatter = NumberFormat.getCurrencyInstance();
                 value = formatter.format(Float.parseFloat(value));
             }
 
-            if (tempC)
+            else if (tempC)
                 value += " °C";
-            if (tempF)
+            else if (tempF)
                 value += " °F";
 
             newString = newString.replace(match, value);
