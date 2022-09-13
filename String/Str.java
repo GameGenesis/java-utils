@@ -59,13 +59,14 @@ public class Str {
     public static String fmt(String string, Object... args) {
         String newString = string;
 
+        String alignment = "";
         String decimal = "";
         String percent = "";
         boolean currency = false;
         boolean tempC = false;
         boolean tempF = false;
 
-        Matcher m = Pattern.compile("\\{(.*?)\\d(.*?)\\}").matcher(string);
+        Matcher m = Pattern.compile("\\{(.*?)\\d+(.*?)\\}").matcher(string);
         while (m.find()) {
             String match = m.group();
 
@@ -75,12 +76,12 @@ public class Str {
                 alignment = am.group();
 
             decimal = "";
-            Matcher dm = Pattern.compile("\\:\s?[fF]\\d?").matcher(match);
+            Matcher dm = Pattern.compile("\\:\s?[fF](\\d+)?").matcher(match);
             while (dm.find())
                 decimal = dm.group();
 
             percent = "";
-            Matcher pm = Pattern.compile("\\:\s?[pP]\\d?|%").matcher(match);
+            Matcher pm = Pattern.compile("\\:\s?[pP](\\d+)?|%").matcher(match);
             while (pm.find())
                 percent = pm.group();
             percent = percent.replace("%", ":P1");
