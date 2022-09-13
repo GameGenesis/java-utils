@@ -70,19 +70,19 @@ public class Str {
             String match = m.group();
 
             decimal = "";
-            Matcher dm = Pattern.compile("\\:[fF]\\d?").matcher(match);
+            Matcher dm = Pattern.compile("\\:\s?[fF]\\d?").matcher(match);
             while (dm.find())
                 decimal = dm.group();
 
             percent = "";
-            Matcher pm = Pattern.compile("\\:[pP]\\d?|%").matcher(match);
+            Matcher pm = Pattern.compile("\\:\s?[pP]\\d?|%").matcher(match);
             while (pm.find())
                 percent = pm.group();
             percent = percent.replace("%", ":P1");
             
-            currency = Pattern.compile("\\:[cC]|\\$").matcher(match).find();
-            tempC = Pattern.compile("\\:[tT][cC]").matcher(match).find();
-            tempF = Pattern.compile("\\:[tT][fF]").matcher(match).find();
+            currency = Pattern.compile("\\:\s?[cC]|\\$").matcher(match).find();
+            tempC = Pattern.compile("\\:\s?[tT][cC]").matcher(match).find();
+            tempF = Pattern.compile("\\:\s?[tT][fF]").matcher(match).find();
 
             String updatedMatch = match.replace(decimal, "").replace(percent, "");
             int index = Integer.parseInt(updatedMatch.replaceAll("[^0-9]", ""));
