@@ -5,6 +5,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Str {
+    public static void printf(String string, Object... args) {
+        print(fmt(string, args));
+    }
+
     public static void print(String... values) {
         print(" ".toCharArray(), "\n".toCharArray(), values);
     }
