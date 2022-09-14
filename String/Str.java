@@ -117,6 +117,23 @@ public class Str {
      *          If the precision specifier is omitted, the number of decimal places is 2.
      *          Example: <code>1234.567 ("N") -> 1,234.57</code> or <code>1234 ("N1") -> 1,234.0</code>
      *          </li>
+     *          <li><b>Decimal format specifier ("D" or "d") <code>{index:D[minimum no. of digits]}</code>: </b>
+     *          The "D" (or decimal) format specifier converts a number to a string of decimal digits (0-9),
+     *          prefixed by a minus sign if the number is negative. This format is supported only for integral types.
+     *          The precision specifier indicates the minimum number of digits desired in the resulting string.
+     *          If required, the number is padded with zeros to its left to produce the number of digits
+     *          given by the precision specifier. If no precision specifier is specified,
+     *          the default is the minimum value required to represent the integer without leading zeros.
+     *          Example: <code>1234 ("D") -> 1234</code> or <code>-1234 ("D6") -> -001234</code>
+     *          </li>
+     *          <li><b>Exponential format specifier ("E" or "e") <code>{index:E[no. of decimal digits]}</code>: </b>
+     *          The exponential ("E") format specifier converts a number to a string of the form "-d.ddd…E+dd" or "-d.ddd…e+dd",
+     *          where each "d" indicates a digit (0-9). The string starts with a minus sign if the number is negative.
+     *          Exactly one digit always precedes the decimal point.
+     *          The precision specifier indicates the desired number of digits after the decimal point.
+     *          If the precision specifier is omitted, a default of six digits after the decimal point is used.
+     *          Example: <code>1052.0329112756 ("E") -> 1.052033E+03</code> or <code>-1052.0329112756 ("e2") -> -1.05e+03</code>
+     *          </li>
      *      </li>
      *  </ul>
      * </ul>
