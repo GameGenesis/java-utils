@@ -96,7 +96,7 @@ public class Str {
             tempC = Pattern.compile("\\:\s?[tT][cC]").matcher(match).find();
             tempF = Pattern.compile("\\:\s?[tT][fF]").matcher(match).find();
 
-            String updatedMatch = match.replace(alignment, "").replace(fixedPoint, "").replace(percent, "");
+            String updatedMatch = match.replace(alignment, "").replace(fixedPoint, "").replace(number, "").replace(percent, "");
             int index = Integer.parseInt(updatedMatch.replaceAll("[^0-9]", ""));
             String value = args[index].toString();
 
