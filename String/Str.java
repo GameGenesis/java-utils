@@ -228,10 +228,12 @@ public class Str {
             }
 
             else if (exponential != "") {
+                String exponentialFormat = exponential.replaceAll("[^eE]", "");
+                print(exponentialFormat);
                 exponential = exponential.replaceAll("[^0-9]", "");
                 if (exponential == "")
                     exponential = "6";
-                String newExponential = String.format("%." + exponential + "e", Double.parseDouble(value));
+                String newExponential = String.format("%." + exponential + exponentialFormat, Double.parseDouble(value));
                 value = value.replace(value.replaceAll("\\s+",""), newExponential);
             }
 
