@@ -147,6 +147,13 @@ public class Str {
      *          The default format is <code>$####.##</code> where <code>####</code> can be any length.
      *          Example: <code>123.456 ("C") -> $123.46</code> or <code>1234 ("$") -> $1234.00</code>
      *          </li>
+     *          <li><b>Temperature format specifier ("TC" or "TF" or "tc" or "tf") <code>{index:TF}</code>
+     *          or <code>{index:TC}</code>: </b>
+     *          The temperature ("TC" or "TF") format specifier converts a number to a string that represents a temperature.
+     *          The default number of decimal digits is 1 or the number of decimal digits in the float argument.
+     *          The default format is <code>#.# °C</code> or <code>#.# °F</code>.
+     *          Example: <code>100 ("TC") -> 100.0 °C</code> or <code>-212.7685 ("TF") -> -212.7685 °F</code>
+     *          </li>
      *      </li>
      *  </ul>
      * </ul>
