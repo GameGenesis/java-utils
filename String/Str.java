@@ -62,6 +62,7 @@ public class Str {
         String alignment = "";
         String fixedPoint = "";
         String number = "";
+        String decimal = "";
         String percent = "";
         boolean currency = false;
         boolean tempC = false;
@@ -77,14 +78,19 @@ public class Str {
                 alignment = am.group();
 
             fixedPoint = "";
-            Matcher dm = Pattern.compile("\\:\s?[fF](\\d+)?").matcher(match);
-            while (dm.find())
-                fixedPoint = dm.group();
+            Matcher fm = Pattern.compile("\\:\s?[fF](\\d+)?").matcher(match);
+            while (fm.find())
+                fixedPoint = fm.group();
 
             number = "";
             Matcher nm = Pattern.compile("\\:\s?[nN](\\d+)?").matcher(match);
             while (nm.find())
                 number = nm.group();
+            
+            decimal = "";
+            Matcher dm = Pattern.compile("\\:\s?[dD](\\d+)?").matcher(match);
+            while (dm.find())
+                decimal = dm.group();
 
             percent = "";
             Matcher pm = Pattern.compile("\\:\s?[pP](\\d+)?|%").matcher(match);
@@ -96,7 +102,11 @@ public class Str {
             tempC = Pattern.compile("\\:\s?[tT][cC]").matcher(match).find();
             tempF = Pattern.compile("\\:\s?[tT][fF]").matcher(match).find();
 
-            String updatedMatch = match.replace(alignment, "").replace(fixedPoint, "").replace(number, "").replace(percent, "");
+            String updatedMatch = match .replace(alignment, "")
+                                        .replace(fixedPoint, "")
+                                        .replace(number, "")
+                                        .replace(decimal, "")
+                                        .replace(percent, "");
             int index = Integer.parseInt(updatedMatch.replaceAll("[^0-9]", ""));
             String value = args[index].toString();
 
@@ -104,16 +114,24 @@ public class Str {
                 fixedPoint = fixedPoint.replaceAll("[^0-9]", "");
                 if (fixedPoint == "")
                     fixedPoint = "2";
-                String newFloat = String.format("%." + fixedPoint + "f", Float.parseFloat(value));
-                value = value.replace(value.replaceAll("\\s+",""), newFloat);
+                String newFixedPoint = String.format("%." + fixedPoint + "f", Float.parseFloat(value));
+                value = value.replace(value.replaceAll("\\s+",""), newFixedPoint);
             }
 
             else if (number != "") {
                 number = number.replaceAll("[^0-9]", "");
                 if (number == "")
                     number = "2";
-                String newFloat = String.format("%,." + number + "f", Double.parseDouble(value));
-                value = value.replace(value.replaceAll("\\s+",""), newFloat);
+                String newNumber = String.format("%,." + number + "f", Double.parseDouble(value));
+                value = value.replace(value.replaceAll("\\s+",""), newNumber);
+            }
+
+            else if (decimal != "") {
+                decimal = decimal.replaceAll("[^0-9]", "");
+                if (decimal != "") {
+                    String newDecimal = String.format("%0" + decimal + "d", Integer.parseInt(value));
+                    value = value.replace(value.replaceAll("\\s+",""), newDecimal);
+                }
             }
 
             else if (percent != "") {
