@@ -109,6 +109,24 @@ public class Str {
     }
 
     /**
+     * Returns true if all the characters in a string are digits
+     * @param string The string to check
+     * @return Whether all the characters in a string are digits
+     */
+    public static boolean isDigit(String string) {
+        return string.matches("^\\d+$");
+    }
+
+    /**
+     * Returns true if all the characters in a string are decimals
+     * @param string The string to check
+     * @return Whether all the characters in a string are decimals
+     */
+    public static boolean isDecimal(String string) {
+        return string.matches("^\\d+?\\.?\\d+?$");
+    }
+
+    /**
      * Converts the value of objects to strings based on the formats specified and inserts them into another string.
      * Replaces the format item in a specified string with the string representation of a corresponding object in a specified array.
      * <p>
