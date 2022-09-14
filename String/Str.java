@@ -82,6 +82,33 @@ public class Str {
     }
 
     /**
+     * Returns true if all the characters in a string are in the alphabet
+     * @param string The string to check
+     * @return Whether all the characters in a string are in the alphabet 
+     */
+    public static boolean isAlpha(String string) {
+        return string.matches("[a-zA-Z]+");
+    }
+
+    /**
+     * Returns true if all the characters in a string are alphanumeric
+     * @param string The string to check
+     * @return Whether all the characters in a string are alphanumeric
+     */
+    public static boolean isAlphaNum(String string) {
+        return string.matches("[a-zA-Z0-9]+");
+    }
+
+    /**
+     * Returns true if all the characters in a string are ascii characters
+     * @param string The string to check
+     * @return Whether all the characters in a string are ascii characters
+     */
+    public static boolean isAscii(String string) {
+        return Charset.forName("US-ASCII").newEncoder().canEncode(string);
+    }
+
+    /**
      * Converts the value of objects to strings based on the formats specified and inserts them into another string.
      * Replaces the format item in a specified string with the string representation of a corresponding object in a specified array.
      * <p>
