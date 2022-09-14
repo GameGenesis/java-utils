@@ -56,6 +56,16 @@ public class Str {
         return sb.toString();
     }
 
+    /**
+     * Capitalizes the first letter of a string
+     * @param string The string to capitalize
+     * @return The new string with the capitalization
+     */
+    public static String capitalize(String string) {
+        return string.substring(0, 1).toUpperCase() + string.substring(1);
+    }
+
+
     public static String fmt(String string, Object... args) {
         String newString = string;
 
@@ -121,7 +131,7 @@ public class Str {
                 fixedPoint = fixedPoint.replaceAll("[^0-9]", "");
                 if (fixedPoint == "")
                     fixedPoint = "2";
-                String newFixedPoint = String.format("%." + fixedPoint + "f", Float.parseFloat(value));
+                String newFixedPoint = String.format("%." + fixedPoint + "f", Double.parseDouble(value));
                 value = value.replace(value.replaceAll("\\s+",""), newFixedPoint);
             }
 
