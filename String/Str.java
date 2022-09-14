@@ -1,5 +1,6 @@
 package String;
 
+import java.nio.charset.Charset;
 import java.text.NumberFormat;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -68,6 +69,16 @@ public class Str {
      */
     public static String capitalize(String string) {
         return string.substring(0, 1).toUpperCase() + string.substring(1);
+    }
+
+    /**
+     * Returns the number of times a substring occurs in a string
+     * @param string The string that includes the susbstring
+     * @param substring The substring to count
+     * @return The number of times a substring occurs in a string
+     */
+    public static int count(String string, String substring) {
+        return string.split(substring, -1).length - 1;
     }
 
     /**
@@ -249,7 +260,6 @@ public class Str {
 
             else if (exponential != "") {
                 String exponentialFormat = exponential.replaceAll("[^eE]", "");
-                print(exponentialFormat);
                 exponential = exponential.replaceAll("[^0-9]", "");
                 if (exponential == "")
                     exponential = "6";
