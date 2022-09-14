@@ -46,6 +46,11 @@ public class Str {
         System.out.print(string + fromCharArray(endChars));
     }
 
+    /**
+     * Converts a char array to a string
+     * @param charArray The char array to convert to a string
+     * @return The string formed from the char array
+     */
     public static String fromCharArray(char[] charArray) {
         StringBuilder sb = new StringBuilder();
  
