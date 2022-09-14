@@ -102,6 +102,21 @@ public class Str {
      *          To left-align strings in a field, you preface the field width with a negative sign,
      *          such as <code>{0,-12}</code> to define a 12-character left-aligned field.
      *          </li>
+     *          <li><b>Fixed-Point ("F" or "f") <code>{index:F[no. of decimal digits]}</code>: </b>
+     *          The fixed-point ("F") format specifier converts a number to a string of the form "-ddd.ddd…"
+     *          where each "d" indicates a digit (0-9). The string starts with a minus sign if the number is negative.
+     *          The precision specifier indicates the desired number of decimal places. If the precision specifier is omitted,
+     *          the number of decimal digits defaults to 2.
+     *          Example: <code>1234.567 ("F") -> 1234.57</code> or <code>1234 ("F1") -> 1234.0</code>
+     *          </li>
+     *          <li><b>Numeric format specifier ("N" or "n") <code>{index:N[no. of decimal digits]}</code>: </b>
+     *          The numeric ("N") format specifier converts a number to a string of the form "-d,ddd,ddd.ddd…",
+     *          where "-" indicates a negative number symbol if required, "d" indicates a digit (0-9),
+     *          "," indicates a group separator, and "." indicates a decimal point symbol.
+     *          The precision specifier indicates the desired number of digits after the decimal point.
+     *          If the precision specifier is omitted, the number of decimal places is 2.
+     *          Example: <code>1234.567 ("N") -> 1,234.57</code> or <code>1234 ("N1") -> 1,234.0</code>
+     *          </li>
      *      </li>
      *  </ul>
      * </ul>
