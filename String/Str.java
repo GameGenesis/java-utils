@@ -70,7 +70,46 @@ public class Str {
         return string.substring(0, 1).toUpperCase() + string.substring(1);
     }
 
-
+    /**
+     * Converts the value of objects to strings based on the formats specified and inserts them into another string.
+     * Replaces the format item in a specified string with the string representation of a corresponding object in a specified array.
+     * <p>
+     * A format item has this syntax: <code>{index[,alignment][:formatString]}</code>
+     * 
+     * <p>
+     * <b>Example Implementation:</b>
+     * <pre>
+     * {@code}
+     *int number = 5;
+     *int solution = 10;
+     *
+     *String str = Str.format("The solution to {0} + {0} is {1}", number, solution);
+     *Str.print(str);
+     *
+     *>> "The solution to 5 + 5 is 10"
+     * </pre>
+     * 
+     * <ul>
+     *  <li><b>Format Specifiers</b>
+     *      <ul>
+     *          <li><b>Control spacing <code>{index,width}</code>: </b>
+     *          You can define the width of the string that is inserted into the result string by using syntax such as
+     *          <code>{0,12}</code> or <code>{0, 12}</code>, which inserts a 12-character string.
+     *          In this case, the string representation of the first object is right-aligned in the 12-character field.
+     *          (If the string representation of the first object is more than 12 characters in length,
+     *          though, the preferred field width is ignored, and the entire string is inserted into the result string.)
+     *          By default, strings are right-aligned within their field if you specify a field width.
+     *          To left-align strings in a field, you preface the field width with a negative sign,
+     *          such as <code>{0,-12}</code> to define a 12-character left-aligned field.
+     *          </li>
+     *      </li>
+     *  </ul>
+     * </ul>
+     * 
+     * @param string The string that includes the format items
+     * @param args The objects to insert into the string
+     * @return The formatted string
+     */
     public static String fmt(String string, Object... args) {
         String newString = string;
 
