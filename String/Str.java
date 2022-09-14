@@ -134,6 +134,17 @@ public class Str {
      *          If the precision specifier is omitted, a default of six digits after the decimal point is used.
      *          Example: <code>1052.0329112756 ("E") -> 1.052033E+03</code> or <code>-1052.0329112756 ("e2") -> -1.05e+03</code>
      *          </li>
+     *          <li><b>Percent format specifier ("P" or "p") <code>{index:P[no. of decimal digits]}</code>: </b>
+     *          The percent ("P") format specifier multiplies a number by 100 and converts it to a string
+     *          that represents a percentage. The precision specifier indicates the desired number of decimal places.
+     *          If the precision specifier is omitted, the number of decimal places is 2.
+     *          Example: <code>1 ("P") -> 100.00%</code> or <code>-0.39678 ("P1") -> -39.7%</code>
+     *          </li>
+     *          <li><b>Currency format specifier ("C" or "c") <code>{index:C}</code>: </b>
+     *          The "C" (or currency) format specifier converts a number to a string that represents a currency amount.
+     *          The default format is <code>$[####].##</code>.
+     *          Example: <code>123.456 ("C") -> $123.46</code>
+     *          </li>
      *      </li>
      *  </ul>
      * </ul>
@@ -188,7 +199,7 @@ public class Str {
             Matcher pm = Pattern.compile("\\:\s?[pP](\\d+)?|%").matcher(match);
             while (pm.find())
                 percent = pm.group();
-            percent = percent.replace("%", ":P1");
+            percent = percent.replace("%", ":P");
             
             currency = Pattern.compile("\\:\s?[cC]|\\$").matcher(match).find();
             tempC = Pattern.compile("\\:\s?[tT][cC]").matcher(match).find();
@@ -241,7 +252,7 @@ public class Str {
                 NumberFormat formatter = NumberFormat.getPercentInstance();
                 percent = percent.replaceAll("[^0-9]", "");
                 if (percent == "")
-                    percent = "1";
+                    percent = "2";
                     formatter.setMinimumFractionDigits(Integer.parseInt(percent));
                 value = formatter.format(Float.parseFloat(value));
             }
