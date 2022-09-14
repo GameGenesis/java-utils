@@ -12,7 +12,7 @@ public class Main {
         Str.printf("|{0,14}|", age);
         Str.printf("|{0, -14:f1}|", age);
         Str.printf("|{0:p,-14}|", age);
-        Str.printf("I am {0:D} or {0:d5} years old", age);
+        Str.printf("I am {0:D} or {0:d5} or {0:e} or {0:E2} years old", age);
         Str.print(Str.fmt("My name is {0} and I am {1:F3} or {1:f} years old. I have {$1} or {1:C}. I have {2:N0}", name, age, money));
         Str.printf("The temperature is {0:tc} or {1:TF}", temperature, temperature * (9f/5f) + 32f);
         Str.printf("The percent is {0:P1} or {0:p} or {0%}", percent);

@@ -63,6 +63,7 @@ public class Str {
         String fixedPoint = "";
         String number = "";
         String decimal = "";
+        String exponential = "";
         String percent = "";
         boolean currency = false;
         boolean tempC = false;
@@ -92,6 +93,11 @@ public class Str {
             while (dm.find())
                 decimal = dm.group();
 
+            exponential = "";
+            Matcher em = Pattern.compile("\\:\s?[eE](\\d+)?").matcher(match);
+            while (em.find())
+                exponential = em.group();
+
             percent = "";
             Matcher pm = Pattern.compile("\\:\s?[pP](\\d+)?|%").matcher(match);
             while (pm.find())
@@ -106,6 +112,7 @@ public class Str {
                                         .replace(fixedPoint, "")
                                         .replace(number, "")
                                         .replace(decimal, "")
+                                        .replace(exponential, "")
                                         .replace(percent, "");
             int index = Integer.parseInt(updatedMatch.replaceAll("[^0-9]", ""));
             String value = args[index].toString();
@@ -132,6 +139,14 @@ public class Str {
                     String newDecimal = String.format("%0" + decimal + "d", Integer.parseInt(value));
                     value = value.replace(value.replaceAll("\\s+",""), newDecimal);
                 }
+            }
+
+            else if (exponential != "") {
+                exponential = exponential.replaceAll("[^0-9]", "");
+                if (exponential == "")
+                    exponential = "6";
+                String newExponential = String.format("%." + exponential + "e", Double.parseDouble(value));
+                value = value.replace(value.replaceAll("\\s+",""), newExponential);
             }
 
             else if (percent != "") {
