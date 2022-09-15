@@ -8,7 +8,8 @@ public class Main {
     public static double percent = 0.34786;
 
     public static void main(String[] args) {
-        // name = Str.input("Enter your name: ");
+        // name = Str.input("Enter your name: ");`
+        Str.print(Str.toTitleCase("aNNie in the big city"));
         Str.printf("|{0,14}|", age);
         Str.printf("|{0, -14:f1}|", age);
         Str.printf("|{0:p,-14}|", age);
