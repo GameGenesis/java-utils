@@ -84,7 +84,7 @@ public class Str {
     /**
      * Returns true if all the characters in a string are in the alphabet
      * @param string The string to check
-     * @return Whether all the characters in a string are in the alphabet 
+     * @return True if all the characters in a string are in the alphabet 
      */
     public static boolean isAlpha(String string) {
         return string.matches("[a-zA-Z]+");
@@ -93,7 +93,7 @@ public class Str {
     /**
      * Returns true if all the characters in a string are alphanumeric
      * @param string The string to check
-     * @return Whether all the characters in a string are alphanumeric
+     * @return True if all the characters in a string are alphanumeric
      */
     public static boolean isAlphaNum(String string) {
         return string.matches("[a-zA-Z0-9]+");
@@ -102,7 +102,7 @@ public class Str {
     /**
      * Returns true if all the characters in a string are ascii characters
      * @param string The string to check
-     * @return Whether all the characters in a string are ascii characters
+     * @return True if all the characters in a string are ascii characters
      */
     public static boolean isAscii(String string) {
         return Charset.forName("US-ASCII").newEncoder().canEncode(string);
@@ -111,7 +111,7 @@ public class Str {
     /**
      * Returns true if all the characters in a string are digits
      * @param string The string to check
-     * @return Whether all the characters in a string are digits
+     * @return True if all the characters in a string are digits
      */
     public static boolean isDigit(String string) {
         return string.matches("^\\d+$");
@@ -120,7 +120,7 @@ public class Str {
     /**
      * Returns true if all the characters in a string are decimals
      * @param string The string to check
-     * @return Whether all the characters in a string are decimals
+     * @return True if all the characters in a string are decimals
      */
     public static boolean isDecimal(String string) {
         return string.matches("^\\d+?\\.?\\d+?$");
@@ -129,7 +129,7 @@ public class Str {
     /**
      * Returns true if all the characters in a string are lower case
      * @param string The string to check
-     * @return Whether all the characters in a string are lower case
+     * @return True if all the characters in a string are lower case
      */
     public static boolean isLower(String string) {
         char ch;
@@ -146,9 +146,9 @@ public class Str {
     }
 
     /**
-     * Returns true if all the characters in a string are lower case
+     * Returns true if all the characters in a string are upper case
      * @param string The string to check
-     * @return Whether all the characters in a string are lower case
+     * @return True if all the characters in a string are upper case
      */
     public static boolean isUpper(String string) {
         char ch;
@@ -162,6 +162,27 @@ public class Str {
         };
 
         return isUpper;
+    }
+
+    /**
+     * Returns true if the string is a valid java identifier
+     * (contains only letters, numbers, and underscores, but doesn't start with a number).
+     * @param string The string to check
+     * @return True if the string is a valid java identifier
+     */
+    public static boolean isValidJavaIdentifier(String string) {
+        if (string.isEmpty()) {
+            return false;
+        }
+        if (!Character.isJavaIdentifierStart(string.charAt(0))) {
+            return false;
+        }
+        for (int i = 1; i < string.length(); i++) {
+            if (!Character.isJavaIdentifierPart(string.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
