@@ -3,6 +3,7 @@ package String;
 import java.nio.charset.Charset;
 import java.text.NumberFormat;
 import java.util.Scanner;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,6 +30,36 @@ public class Str {
 
     public static void printf(char[] separationChars, char[] endChars, String string, Object... args) {
         print(separationChars, endChars, fmt(string, args));
+    }
+
+    public static void print(Integer... values) {
+        Function<Integer, String> func = s -> Integer.toString(s);
+        Str.<Integer>print(values, func);
+    }
+
+    public static void print(Float... values) {
+        Function<Float, String> func = s -> Float.toString(s);
+        Str.<Float>print(values, func);
+    }
+
+    public static void print(Double... values) {
+        Function<Double, String> func = s -> Double.toString(s);
+        Str.<Double>print(values, func);
+    }
+
+    public static void print(Boolean... values) {
+        Function<Boolean, String> func = s -> Boolean.toString(s);
+        Str.<Boolean>print(values, func);
+    }
+
+    private static <T> void print(T[] values, Function<T, String> function) {
+        String valueStrings[] = new String[values.length];
+
+        for (int i = 0; i < values.length; i++) {
+            valueStrings[i] = function.apply(values[i]);
+        }
+
+        print(valueStrings);
     }
 
     public static void print(String... values) {
