@@ -152,6 +152,15 @@ public class Str {
     public static String justifyRight(String string, int width) {
         return fmt("{0," + width + "}", string);
     }
+
+    public static String[] splitLines(String string) {
+        return string.split("\\r?\\n");
+    }
+
+    public static String zfill(String string, int width) {
+        return new String(new char[width - string.length()]).replace('\0', '0') + string;
+    }
+
     /**
      * Returns the number of times a substring occurs in a string
      * @param string The string that includes the susbstring
