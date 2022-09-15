@@ -145,6 +145,13 @@ public class Str {
         return String.join(" ", splitStr);
     }
 
+    public static String justifyLeft(String string, int width) {
+        return fmt("{0," + -width + "}", string);
+    }
+
+    public static String justifyRight(String string, int width) {
+        return fmt("{0," + width + "}", string);
+    }
     /**
      * Returns the number of times a substring occurs in a string
      * @param string The string that includes the susbstring
