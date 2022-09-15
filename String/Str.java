@@ -2,6 +2,8 @@ package String;
 
 import java.nio.charset.Charset;
 import java.text.NumberFormat;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.function.Function;
 import java.util.regex.Matcher;
@@ -100,6 +102,36 @@ public class Str {
      */
     public static String capitalize(String string) {
         return string.substring(0, 1).toUpperCase() + string.substring(1);
+    }
+
+    public static String toStartCase(String string) {
+        char[] chars = string.toLowerCase().toCharArray();
+        boolean found = false;
+        for (int i = 0; i < chars.length; i++) {
+            if (!found && Character.isLetter(chars[i])) {
+                chars[i] = Character.toUpperCase(chars[i]);
+                found = true;
+            } else if (Character.isWhitespace(chars[i]) || chars[i]=='.' || chars[i]=='\'') {
+                found = false;
+            }
+        }
+        return String.valueOf(chars);
+    }
+
+    public static String toTitleCase(String string) {
+        String[] splitStr = string.toLowerCase().split(" ");
+        List<String> exceptions = Arrays.asList("and", "the", "a", "an", "for", "to", "yet",
+                                                "but", "at", "by", "as", "if", "or", "nor", "so",
+                                                "in", "of", "off", "on", "per", "up", "via");
+
+        for(int i = 0; i < splitStr.length; i++) { 
+            if(i > 0 && exceptions.contains(splitStr[i]))
+                continue;
+        
+            splitStr[i] = Character.toUpperCase(splitStr[i].charAt(0)) + splitStr[i].substring(1);
+        }
+
+        return String.join(" ", splitStr);
     }
 
     /**
