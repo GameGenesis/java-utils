@@ -104,6 +104,11 @@ public class Str {
         return string.substring(0, 1).toUpperCase() + string.substring(1);
     }
 
+    /**
+     * Capitalizes the first letter of every word in a string (and converts the rest to lower case)
+     * @param string The string to convert to start case
+     * @return The new string with the capitalization
+     */
     public static String toStartCase(String string) {
         char[] chars = string.toLowerCase().toCharArray();
         boolean found = false;
@@ -118,6 +123,12 @@ public class Str {
         return String.valueOf(chars);
     }
 
+    /**
+     * Capitalizes the first letter of every word in a string (and converts the rest to lower case),
+     * except certain articles and prepositions
+     * @param string The string to convert to title case
+     * @return The new string with the capitalization
+     */
     public static String toTitleCase(String string) {
         String[] splitStr = string.toLowerCase().split(" ");
         List<String> exceptions = Arrays.asList("and", "the", "a", "an", "for", "to", "yet",
