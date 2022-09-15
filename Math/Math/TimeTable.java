@@ -1,3 +1,5 @@
+package Math;
+
 import String.Str;
 
 public class TimeTable {

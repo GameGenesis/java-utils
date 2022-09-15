@@ -1,7 +1,9 @@
+package Math;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Prime {
+public class MathUtils {
     public static boolean isPrime(int number) {
         if (number <= 1)
             return false;
